@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parallax – Use of Cookies</title>
+  <link rel="icon" type="image/png" href="resource/img/Logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        system-ui, -system-ui, "Helvetica Neue", Arial, sans-serif;
+      color: #111827;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 40px 16px 80px;
+      background:
+        radial-gradient(circle at top left, #ffffff 0, #f6f7fb 35%, #e4ecff 70%, #dde7ff 100%);
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 22px;
+      padding: 48px 56px 56px;
+
+      background:
+        radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.82)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(244, 247, 255, 0.96));
+      border: 1px solid rgba(148, 163, 184, 0.42);
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.14),
+        0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+      backdrop-filter: blur(26px) saturate(135%);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 24px 12px 40px;
+      }
+      .page {
+        padding: 32px 20px 40px;
+        border-radius: 18px;
+      }
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .page-title {
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      color: #020617;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6b7280;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+      margin: 24px 0 32px;
+    }
+
+    .section {
+      margin-bottom: 28px;
+      line-height: 1.7;
+      font-size: 15px;
+      color: #111827;
+    }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+      color: #020617;
+    }
+
+    .section p {
+      margin-bottom: 10px;
+    }
+
+    .section ul {
+      margin: 8px 0 8px 20px;
+      padding-left: 4px;
+    }
+
+    .section li {
+      margin-bottom: 4px;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    .back-fab {
+      position: fixed;
+      right: 2.5rem;
+      bottom: 2.5rem;
+      z-index: 999;
+    }
+
+    .back-fab__button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+
+      background:
+        radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(243, 246, 255, 0.96));
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow:
+        0 14px 30px rgba(15, 23, 42, 0.14),
+        0 0 0 1px rgba(255, 255, 255, 0.85) inset;
+      backdrop-filter: blur(22px) saturate(130%);
+
+      color: #111827;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      transition:
+        transform 150ms ease-out,
+        box-shadow 150ms ease-out,
+        border-color 150ms ease-out,
+        background 150ms ease-out;
+    }
+
+    .back-fab__icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(135deg,
+          rgba(255, 255, 255, 0.97),
+          rgba(226, 232, 240, 0.9)
+        );
+      box-shadow:
+        0 3px 6px rgba(148, 163, 184, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+    }
+
+    .back-fab__icon svg {
+      width: 11px;
+      height: 11px;
+      display: block;
+      color: #0f172a;
+    }
+
+    .back-fab__labels {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .back-fab__label-main {
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .back-fab__label-sub {
+      font-size: 0.74rem;
+      opacity: 0.75;
+      line-height: 1.2;
+    }
+
+    .back-fab__button:hover {
+      transform: translateY(-1px) scale(1.02);
+      border-color: rgba(59, 130, 246, 0.78);
+      background:
+        radial-gradient(circle at 0 0, rgba(219, 234, 254, 0.96), rgba(255, 255, 255, 0.96)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.99), rgba(219, 234, 254, 0.99));
+      box-shadow:
+        0 18px 38px rgba(15, 23, 42, 0.16),
+        0 0 0 1px rgba(226, 232, 240, 0.9) inset;
+    }
+
+    .back-fab__button:active {
+      transform: translateY(1px) scale(0.97);
+      box-shadow:
+        0 8px 18px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(203, 213, 225, 0.95) inset;
+    }
+
+    @media (max-width: 600px) {
+      .back-fab {
+        right: 1.25rem;
+        bottom: 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">Parallax’s Use of Cookies</h1>
+      <div class="page-subtitle">Cookie Information</div>
+    </header>
+
+    <hr class="divider" />
+
+    <section class="section">
+      <p>
+        Parallax’s web services may use “cookies.” Cookies help us provide essential
+        functionality such as account sign-in, session continuity, form validation,
+        and user experience preferences. They also help us understand basic usage
+        patterns so we can maintain service quality and system reliability.
+      </p>
+      <p>
+        Because cookies are required for core security features, disabling them may
+        prevent certain parts of the site from functioning properly.
+      </p>
+      <p>
+        If you wish to disable cookies, you may do so through your browser’s settings.
+        Note that disabling strictly necessary cookies will limit your ability to sign in
+        or use key account-related features.
+      </p>
+      <p>
+        Cookies used on our site are categorized based on common industry guidelines.
+        Parallax uses the following categories on our websites and services:
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Category 1 — Strictly Necessary Cookies</h2>
+      <p>
+        These cookies are required for the site to operate securely and correctly.
+        Without them, essential features of the Parallax service cannot be provided.
+      </p>
+      <p>We use strictly necessary cookies for:</p>
+      <ul>
+        <li>Maintaining login sessions</li>
+        <li>Verifying request integrity and preventing unauthorized access</li>
+        <li>
+          Ensuring that form submissions, authentication, and account actions
+          function correctly
+        </li>
+        <li>Protecting service endpoints from misuse</li>
+      </ul>
+      <p>
+        These cookies do not store personal information beyond what is required to
+        maintain the secure operation of your account.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Category 2 — Performance Cookies</h2>
+      <p>
+        These cookies collect aggregated, anonymous information about how users
+        interact with the site. They help us improve reliability, performance,
+        and overall user experience.
+      </p>
+      <p>Performance cookies may be used to understand:</p>
+      <ul>
+        <li>Which pages are accessed most frequently</li>
+        <li>Common interaction patterns and load performance</li>
+        <li>Basic error diagnostics and stability insights</li>
+      </ul>
+      <p>
+        These cookies do <strong>not</strong> identify you personally.
+        All data is aggregated and used solely for system improvement.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Category 3 — Functionality Cookies</h2>
+      <p>
+        These cookies allow the Parallax site to remember certain choices you make,
+        in order to provide a smoother experience.
+      </p>
+      <p>Examples include:</p>
+      <ul>
+        <li>Remembering your preferred country or region selection</li>
+        <li>Pre-filling non-sensitive form fields such as phone country code</li>
+        <li>
+          Preserving UI state within a single session (e.g., restoring the
+          last-opened panel)
+        </li>
+      </ul>
+      <p>
+        Functionality cookies do not track your browsing on non-Parallax websites
+        and do not store sensitive personal data.
+      </p>
+    </section>
+  </main>
+
+  <div class="back-fab">
+    <a
+      class="back-fab__button"
+      href="https://parallax.twilightfrosty.com/"
+      onclick="
+        if (window.history.length > 1) {
+          history.back();
+          return false;
+        }
+      "
+    >
+      <span class="back-fab__icon">
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path
+            d="M9.9 3.2a.75.75 0 0 1 0 1.06L6.16 8l3.74 3.74a.75.75 0 1 1-1.06 1.06L4.57 9.47a1 1 0 0 1 0-1.41l4.27-4.27a.75.75 0 0 1 1.06 0z"
+            fill="currentColor"
+          />
+        </svg>
+      </span>
+      <span class="back-fab__labels">
+        <span class="back-fab__label-main">Back to Parallax</span>
+        <span class="back-fab__label-sub">Return to main dashboard</span>
+      </span>
+    </a>
+  </div>
+</body>
+</html>

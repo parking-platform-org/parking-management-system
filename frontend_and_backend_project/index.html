@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parallax</title>
+    <link rel="icon" type="image/png" href="resource/img/Logo.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="apple-header">
+      <nav class="apple-nav" aria-label="Main navigation">
+        <a class="nav-logo" href="#" aria-label="Parallax">
+          <span class="nav-logo-text">Parallax</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#" id="nav-account">My Account</a></li>
+          <li><a href="#" id="nav-vehicles">My Vehicles</a></li>
+          <li><a href="#" id="nav-query">Query</a></li>
+          <li id="nav-signout-item" class="hidden">
+            <a href="#" id="nav-signout">Sign out</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="auth-shell" class="signin-shell">
+        <h1 class="signin-heading">Parallax Account</h1>
+        <p class="signin-subheading">Manage your Parallax Account</p>
+        <section class="signin-card" aria-labelledby="form-title">
+          <div class="account-logo" aria-hidden="true">
+            <div class="parallax-ring-logo">
+              <div class="parallax-ring-bg"></div>
+              <canvas id="parallax-ring-mask"></canvas>
+              <div class="parallax-ring-mark">P</div>
+            </div>
+          </div>
+        <h2 id="form-title" class="card-title">Sign in to Parallax</h2>
+          <form
+            id="login-form"
+            class="auth-form active"
+            data-stage="identifier"
+            novalidate
+          >
+            <label class="input-field floating-field identifier-field">
+              <span class="sr-only">Email or phone number</span>
+              <input
+                id="login-username"
+                type="text"
+                placeholder="Email or Phone Number"
+                autocomplete="username"
+                required
+              />
+              <span class="floating-label" aria-hidden="true"
+                >Email or Phone Number</span
+              >
+            </label>
+            <button type="submit" class="primary-button">Continue</button>
+            <p id="login-stage-note" class="stage-note">
+              Your Parallax Account information is used to sign in securely and
+              access your data. You’ll be asked for your password on the next
+              screen. Need a Parallax ID?
+              <a href="#" class="link create-account-trigger"
+                >Create yours now.</a
+              >
+            </p>
+            <label class="input-field floating-field password-field">
+              <span class="sr-only">Password</span>
+              <input
+                id="login-password"
+                type="password"
+                placeholder="Password"
+                autocomplete="current-password"
+                required
+              />
+              <span class="floating-label" aria-hidden="true">Password</span>
+            </label>
+            <label class="remember-row password-stage">
+              <input id="remember-me" type="checkbox" />
+              <span>Remember me</span>
+            </label>
+            <div class="link-group password-stage">
+              <a href="#" id="forgot-password" class="link">Forgot your password?</a>
+              <a
+                href="#"
+                id="create-account-link"
+                class="link create-account-trigger"
+                >Create Your Parallax Account</a
+              >
+            </div>
+          </form>
+
+          <form id="reset-form" class="auth-form reset-form" novalidate>
+            <div class="reset-layout">
+              <div class="reset-main">
+                <h2 class="reset-title">Reset your password</h2>
+                <p class="reset-description">
+                  Enter your email address or phone number that you use with your
+                  account to continue.
+                </p>
+
+                <label class="field-block" for="reset-identifier">
+                  <span class="field-label">Email address or phone number</span>
+                  <input
+                    id="reset-identifier"
+                    type="text"
+                    autocomplete="username"
+                    required
+                  />
+                </label>
+
+                <div class="verification-box reset-captcha" role="group">
+                  <p class="verification-title">Type the characters in the image</p>
+                  <div
+                    class="verification-code"
+                    id="reset-captcha-display"
+                    aria-live="polite"
+                  >
+                    469P
+                  </div>
+                  <div class="verification-actions">
+                    <button
+                      type="button"
+                      class="link-button"
+                      id="reset-refresh-captcha"
+                    >
+                      New Code
+                    </button>
+                  </div>
+                  <input
+                    id="reset-captcha-input"
+                    type="text"
+                    aria-label="Verification code"
+                    required
+                  />
+                </div>
+
+                <button type="submit" class="primary-button">Continue</button>
+                <p class="reset-links">
+                  <a href="#" id="reset-back-link" class="link">Back to sign in</a>
+                </p>
+              </div>
+              <aside class="reset-support" aria-label="Password reset guidance">
+                <h3>You have come to the right place to reset a forgotten password.</h3>
+                <p>
+                  For your security, we will ask you a few questions to verify that
+                  you are the owner of this account.
+                </p>
+              </aside>
+            </div>
+          </form>
+
+          <form id="register-form" class="auth-form account-form" novalidate>
+            <header class="account-header">
+              <h2 class="account-title">Create Your Parallax Account</h2>
+              <p class="account-subtitle">
+                A Parallax ID is all you need to access every Parallax service.
+                <a href="#" id="back-to-login" class="link"
+                  >Already have a Parallax ID? Sign in &gt;</a
+                >
+              </p>
+            </header>
+
+            <div class="field-stack">
+              <label class="field-block" for="register-country">
+                <span class="field-label">Country/Region</span>
+                <select id="register-country" required></select>
+              </label>
+
+              <div class="field-row">
+                <label class="field-block" for="register-first-name">
+                  <span class="field-label">First name</span>
+                  <input
+                    id="register-first-name"
+                    type="text"
+                    autocomplete="given-name"
+                    required
+                  />
+                </label>
+                <label class="field-block" for="register-last-name">
+                  <span class="field-label">Last name</span>
+                  <input
+                    id="register-last-name"
+                    type="text"
+                    autocomplete="family-name"
+                    required
+                  />
+                </label>
+              </div>
+
+              <div class="field-row">
+                <label class="field-block" for="register-birth-month">
+                  <span class="field-label">Month</span>
+                  <select id="register-birth-month" required></select>
+                </label>
+                <label class="field-block" for="register-birth-day">
+                  <span class="field-label">Day</span>
+                  <select id="register-birth-day" required></select>
+                </label>
+                <label class="field-block" for="register-birth-year">
+                  <span class="field-label">Year</span>
+                  <select id="register-birth-year" required></select>
+                </label>
+              </div>
+
+              <label class="field-block" for="register-email">
+                <span class="field-label">Email</span>
+                <input
+                  id="register-email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                />
+              </label>
+
+              <label class="field-block" for="register-password">
+                <span class="field-label">Password</span>
+                <input
+                  id="register-password"
+                  type="password"
+                  autocomplete="new-password"
+                  required
+                />
+              </label>
+
+              <label class="field-block" for="register-confirm-password">
+                <span class="field-label">Confirm Password</span>
+                <input
+                  id="register-confirm-password"
+                  type="password"
+                  autocomplete="new-password"
+                  required
+                />
+              </label>
+
+              <div class="field-row">
+                <label class="field-block" for="register-phone-country">
+                  <span class="field-label">Country code</span>
+                  <select id="register-phone-country" required></select>
+                </label>
+                <label class="field-block" for="register-phone">
+                  <span class="field-label">Phone number</span>
+                  <input
+                    id="register-phone"
+                    type="tel"
+                    autocomplete="tel"
+                    required
+                  />
+                </label>
+              </div>
+
+              <fieldset class="field-block fieldset">
+                <legend class="field-label">Verify with</legend>
+                <label class="choice-item">
+                  <input
+                    type="radio"
+                    name="contact-method"
+                    value="text"
+                    checked
+                  />
+                  <span>Text message</span>
+                </label>
+                <label class="choice-item">
+                  <input type="radio" name="contact-method" value="call" />
+                  <span>Phone call</span>
+                </label>
+              </fieldset>
+
+              <p class="account-info">
+                By creating a Parallax ID, you agree to receive important
+                account notifications and updates about Parallax services.
+              </p>
+
+              <div class="verification-box">
+                <p class="verification-title">Type the characters in the image</p>
+                <div class="verification-code" id="captcha-display">469P</div>
+                <div class="verification-actions">
+                  <button type="button" class="link-button" id="refresh-captcha">
+                    New Code
+                  </button>
+                </div>
+                <input
+                  id="register-captcha"
+                  type="text"
+                  aria-label="Verification code"
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="primary-button">
+              Create Your Parallax Account
+            </button>
+
+            <p class="account-disclaimer">
+              You acknowledge that Parallax uses your personal information to
+              provide and improve our services, subject to our Privacy Policy.
+            </p>
+          </form>
+          <p id="auth-message" class="message" role="alert"></p>
+        </section>
+      </section>
+
+      <section id="license-section" class="license-panel hidden" aria-live="polite">
+        <div class="license-header">
+          <h2>Vehicles Management</h2>
+          <p id="welcome-message"></p>
+        </div>
+        <form id="license-form" class="license-form">
+          <label class="license-field">
+            <span>License plate number</span>
+            <input
+              type="text"
+              id="license-number"
+              placeholder="e.g., ABC1234"
+              pattern="^[A-Z0-9-]{1,7}$"
+              title="Enter a license plate like ABC1234"
+              required
+            />
+          </label>
+          <label class="license-field">
+            <span>Vehicle make</span>
+            <select id="vehicle-make" required>
+              <option value="" disabled selected>Select make</option>
+            </select>
+          </label>
+          <label class="license-field">
+            <span>Vehicle model</span>
+            <select id="vehicle-model" required>
+              <option value="" disabled selected>Select model</option>
+            </select>
+          </label>
+          <label class="license-field">
+            <span>Vehicle year</span>
+            <select id="vehicle-year" required>
+              <option value="" disabled selected>Select year</option>
+            </select>
+          </label>
+          <button type="submit" class="primary-button">Save License</button>
+        </form>
+        <p id="license-message" class="message" role="alert"></p>
+        <div class="license-list-container">
+          <h3>Registered vehicles</h3>
+          <div class="vehicle-filters" id="vehicle-filters">
+            <label class="filter-field">
+              <span>Search</span>
+              <input
+                id="vehicle-filter-search"
+                type="text"
+                placeholder="Search license, make, or model"
+                aria-label="Search vehicles"
+              />
+            </label>
+            <label class="filter-field">
+              <span>Blacklist status</span>
+              <select id="vehicle-filter-blacklist" aria-label="Filter by blacklist status">
+                <option value="all" selected>All</option>
+                <option value="active">Blacklisted</option>
+                <option value="clear">Not blacklisted</option>
+              </select>
+            </label>
+            <label class="filter-field admin-only-filter" id="vehicle-filter-owner-wrapper">
+              <span>Owner</span>
+              <input
+                id="vehicle-filter-owner"
+                type="text"
+                placeholder="Owner email or phone"
+                aria-label="Filter by owner"
+              />
+            </label>
+          </div>
+          <div class="table-scroll-wrapper">
+            <table id="vehicles-table" class="vehicles-table">
+              <thead id="vehicles-table-head"></thead>
+              <tbody id="vehicles-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="account-section" class="license-panel hidden">
+        <div class="license-header">
+          <h2>Account Management</h2>
+          <p>Update your contact information and password, or delete your account.</p>
+        </div>
+
+        <!-- Contact info form -->
+        <form id="account-contact-form" class="license-form">
+          <h3>Contact information</h3>
+          <label class="license-field">
+            <span>Email</span>
+            <input id="account-email" type="email" required />
+          </label>
+          <label class="license-field">
+            <span>Country code</span>
+            <select id="account-phone-country" required></select>
+          </label>
+          <label class="license-field">
+            <span>Phone number</span>
+            <input id="account-phone" type="tel" required />
+          </label>
+          <label class="license-field">
+            <span>Enter Your Current password</span>
+            <input
+              id="account-current-password-for-contact"
+              type="password"
+              required
+            />
+          </label>
+          <button type="submit" class="primary-button">
+            Save Contact Info
+          </button>
+          <p id="account-contact-message" class="message" role="alert"></p>
+        </form>
+
+        <!-- Change password form -->
+        <form id="account-password-form" class="license-form">
+          <h3>Change password</h3>
+          <label class="license-field">
+            <span>Current password</span>
+            <input id="account-old-password" type="password" required />
+          </label>
+          <label class="license-field">
+            <span>New password</span>
+            <input id="account-new-password" type="password" required />
+          </label>
+          <label class="license-field">
+            <span>Confirm new password</span>
+            <input id="account-confirm-password" type="password" required />
+          </label>
+
+          <div class="verification-box">
+            <p class="verification-title">Type the characters in the image</p>
+            <div
+              class="verification-code"
+              id="account-captcha-display"
+            >
+              1234
+            </div>
+            <div class="verification-actions">
+              <button
+                type="button"
+                class="link-button"
+                id="account-refresh-captcha"
+              >
+                New Code
+              </button>
+            </div>
+            <input
+              id="account-captcha-input"
+              type="text"
+              aria-label="Verification code"
+              required
+            />
+          </div>
+
+          <button type="submit" class="primary-button">
+            Change Password
+          </button>
+          <p id="account-password-message" class="message" role="alert"></p>
+        </form>
+
+        <!-- Delete account -->
+        <div class="license-form">
+          <h3>Delete account</h3>
+          <p>
+            This will permanently delete your account and all vehicles stored in this
+            browser.
+          </p>
+          <button id="account-delete" class="secondary-button">
+            Delete Account
+          </button>
+        </div>
+      </section>
+
+      <section id="query-section" class="license-panel hidden">
+        <div class="license-header">
+          <h2>Vehicles Query</h2>
+          <p>Check blacklist status for any license plate in the system.</p>
+        </div>
+
+        <form id="query-form" class="license-form">
+          <label class="license-field">
+            <span>License plate number</span>
+            <input
+              id="query-license-number"
+              type="text"
+              placeholder="e.g., ABC1234"
+              pattern="^[A-Z0-9-]{1,7}$"
+              required
+            />
+          </label>
+          <button type="submit" class="primary-button">Query</button>
+        </form>
+        <p id="query-message" class="message" role="alert"></p>
+
+        <hr class="query-separator" />
+
+        <form id="query-image-form" class="license-form">
+          <h2>Check from image</h2>
+          <p>Upload a photo of a vehicle license plate. We will detect the plate and check its blacklist status.</p>
+          <label class="license-field">
+            <span>License plate image</span>
+            <input
+              id="query-image-input"
+              type="file"
+              accept="image/*"
+              required
+            />
+          </label>
+          <button type="submit" class="primary-button">Check Image</button>
+        </form>
+        <p id="query-image-result" class="message" role="alert"></p>
+      </section>
+    </main>
+
+    <footer class="global-footer">
+      <div class="footer-links">
+        <a href="Privacy_Policy.html" class="link">Privacy Policy</a>
+        <a href="Use_of_Cookies.html" class="link">Use of Cookies</a>
+        <a href="Term_of_Use.html" class="link">Terms of Use</a>
+      </div>
+      <p>Copyright © 2025 Parallax Development Team. All rights reserved.</p>
+    </footer>
+
+    <button id="refresh-button" class="refresh-button" aria-label="Reload page">
+      ⟳
+    </button>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

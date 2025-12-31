@@ -1,0 +1,112 @@
+###############################################
+#        OS GARBAGE FILES
+###############################################
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+###############################################
+#        PYTHON
+###############################################
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+sdist/
+wheelhouse/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+###############################################
+#        ENVIRONMENT FILES
+###############################################
+.env
+.env.*
+.venv
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+*.venv
+
+###############################################
+#        LOGS
+###############################################
+*.log
+logs/
+*.out
+*.err
+
+###############################################
+#        FRONTEND (JS/TS/React/Vue)
+###############################################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+*.tsbuildinfo
+
+###############################################
+#        IDE SETTINGS
+###############################################
+.vscode/
+.idea/
+*.code-workspace
+
+###############################################
+#        POWERSELL CURL TRASH
+###############################################
+-F
+-Form
+-U
+-X
+
+###############################################
+#        DATASETS (recommended to exclude)
+###############################################
+datasets/
+
+###############################################
+#        ML / CV (YOLO, training artifacts)
+###############################################
+runs/
+out/
+*.cache
+labels.cache
+
+# Model weights
+models/best.pt
