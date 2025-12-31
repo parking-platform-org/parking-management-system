@@ -182,3 +182,18 @@ POST http://:9000/recognize
 This subproject is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ---
+
+## 📦 Third-Party Dependencies
+
+This subsystem relies on the following open-source projects:
+
+- **fast-plate-ocr**  
+  License plate OCR library used for text extraction.  
+  Author: ankandrew  
+  License: MIT  
+  https://github.com/ankandrew/fast-plate-ocr
+
+- **Ultralytics YOLOv8**  
+  Used for license plate detection.  
+  https://github.com/ultralytics/ultralytics
+---
